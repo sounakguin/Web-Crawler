@@ -2,7 +2,6 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-// Function to fetch and parse web pages
 async function fetchWebPage(url) {
     try {
         const { data } = await axios.get(url);
@@ -13,7 +12,6 @@ async function fetchWebPage(url) {
     }
 }
 
-// Function to extract data from the homepage
 async function extractData() {
     const url = 'https://technoindiauniversity.ac.in/';
     const $ = await fetchWebPage(url);
@@ -38,7 +36,6 @@ async function extractData() {
     return results;
 }
 
-// Function to write data to CSV file
 async function writeDataToCSV(data, filePath) {
     const csvWriter = createCsvWriter({
         path: filePath,
@@ -57,7 +54,6 @@ async function writeDataToCSV(data, filePath) {
     }
 }
 
-// Main function to run the web crawler
 async function main() {
     const results = await extractData();
     await writeDataToCSV(results, 'output.csv');
